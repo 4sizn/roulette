@@ -1,9 +1,18 @@
 import "./style.css";
-import typescriptLogo from "./typescript.svg";
-import viteLogo from "/vite.svg";
+// import typescriptLogo from "./typescript.svg";
+// import viteLogo from "/vite.svg";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
+  <div id="options">
+  <div>
+  <button id="btn-decrease">-</button>
+  <input type="number" id="input-item-count" value="10" />
+  <button id="btn-increase">+</button>
+  </div>
+  <p class="desc">(1개 ~ 9999개 설정 가능)</p>
+  </div>
   <canvas id="canvas"></canvas>
+  <button id="btn-start">start</button>
 `;
 
 const $canvas = document.querySelector("canvas");
@@ -76,7 +85,25 @@ const drawPointer = (position: Position) => {
   ctx.stroke();
 };
 
+const drawText = () => {
+  const arc = Math.PI / (itemList.length / 2);
+
+  for (let i = 0; i < itemList.length; i++) {
+    ctx.fillStyle = "#000000";
+    ctx.font = "20px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    ctx.fillText(
+      itemList[i],
+      center.x + Math.cos(arc * i) * center.x * 0.8,
+      center.y + Math.sin(arc * i) * center.x * 0.8
+    );
+  }
+};
 draw();
+drawText();
+
 drawPointer({
   x: center.x,
   y: 0,
