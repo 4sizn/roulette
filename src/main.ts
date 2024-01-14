@@ -11,7 +11,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   </div>
   <p class="desc">(1개 ~ 9999개 설정 가능)</p>
   </div>
-  <canvas id="canvas"></canvas>
+  <canvas id="canvas" width="680" height="680"></canvas>
   <button id="btn-start">start</button>
 `;
 
@@ -86,18 +86,23 @@ const drawPointer = (position: Position) => {
 };
 
 const drawText = () => {
+  // 각도율
   const arc = Math.PI / (itemList.length / 2);
 
   for (let i = 0; i < itemList.length; i++) {
-    ctx.fillStyle = "#000000";
+    // const angle = arc * i;
+
+    ctx.fillStyle = "#fff";
     ctx.font = "20px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
+    //각도 중앙값
+    const centerAngle = arc * i + arc / 2;
 
     ctx.fillText(
       itemList[i],
-      center.x + Math.cos(arc * i) * center.x * 0.8,
-      center.y + Math.sin(arc * i) * center.x * 0.8
+      center.x + Math.cos(centerAngle) * center.x * 0.8,
+      center.y + Math.sin(centerAngle) * center.x * 0.8
     );
   }
 };
