@@ -21,6 +21,28 @@ if (!$canvas) throw new Error("canvas not found");
 const ctx = $canvas.getContext("2d");
 if (!ctx) throw new Error("context not found");
 
+const $options = document.querySelector("#options");
+console.log("hsshin", $options);
+
+$options?.addEventListener("click", (e) => {
+  if (!e.target) return;
+  const $btn = e.target as HTMLButtonElement;
+
+  const $input = document.querySelector<HTMLInputElement>("#input-item-count");
+  if (!$input) throw new Error("input not found");
+  const value = parseInt($input.value, 10);
+
+  if ($btn.id === "btn-decrease") {
+    if (value > 1) {
+      $input.value = (value - 1).toString();
+    }
+  } else if ($btn.id === "btn-increase") {
+    if (value < 9999) {
+      $input.value = (value + 1).toString();
+    }
+  }
+});
+
 const colors = [
   "#dc0936",
   "#e6471d",
