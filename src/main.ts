@@ -1,4 +1,7 @@
+import SoundManager from "./SoundManager/SoundManager";
+import { EventManager } from "./eventManager";
 import "./style.css";
+import soundSample from "/assets/sounds/sample.mp3";
 // import typescriptLogo from "./typescript.svg";
 // import viteLogo from "/vite.svg";
 
@@ -130,6 +133,20 @@ const drawText = () => {
 };
 draw();
 drawText();
+
+const eventManager = new EventManager();
+const soundManager = new SoundManager();
+soundManager.install("sample2", new Audio(soundSample));
+
+eventManager.on("h", () => {
+  // const audio = new Audio(soundSample);
+  // soundManager.play("sample1", audio);
+  soundManager.play("sample2");
+});
+
+document.querySelector("#btn-start")?.addEventListener("click", () => {
+  eventManager.emit("h");
+});
 
 drawPointer({
   x: center.x,
